@@ -7,10 +7,15 @@
     <img src="https://raw.githubusercontent.com/rickyrigur/YussefNabih/main/Yussef_WP_Profile_Picture.jpg" class="profile-img" alt="Profile Image" />
     <div class="whatsapp-banner-text-container">
       <span class="whatsapp-banner-text">Yussef Nabih</span>
-      <span class="whatsapp-banner-subtext">Online</span>
+      <span class="whatsapp-banner-subtext">Conectado</span>
     </div>
   </div>
-  <div class="whatsapp-message-box"></div>
+  <div class="whatsapp-message-box">
+    <div class="whatsapp-message-background">
+      <span class="whatsapp-message-text">¿Listo para empezar? <br><br>Escríbeme para hablar sobre tu proyecto! 📽️</span>
+      <span class="whatsapp-message-time" id="message-time"></span>
+    </div>
+  </div>
   <div class="whatsapp-button-container">
     <button id="open-whatsapp">Chat on WhatsApp</button>
   </div>
@@ -51,9 +56,9 @@
   }
   
   .whatsapp-banner {
-    width: 100%;
+    width: calc(100% + 2px); /* Adjusted width to cover the entire width including border */
     height: 60px;
-    background-color: #25D366; /* WhatsApp green color */
+    background-color: #008069; /* New banner color */
     color: white;
     display: flex;
     align-items: center;
@@ -62,6 +67,8 @@
     border-radius: 8px 8px 0 0; /* Rounded top corners */
     padding: 0 15px; /* Keep current padding */
     box-sizing: border-box; /* Ensure padding is included in the element's width and height */
+    margin-left: -1px; /*Adjusted margin-left to overlap with container border */
+    margin-top: -1px;
   }
   
   .whatsapp-banner .profile-img {
@@ -89,23 +96,60 @@
   
   .whatsapp-message-box {
     flex-grow: 1; /* This will expand to fill the available space */
-    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 15px; /* Add padding to move the background image to the left */
+    margin-left: -1px; /*Adjusted margin-left to overlap with container border */
+  }
+
+  .whatsapp-message-background {
+    width: 80%;
+    height: 80%;
+    background-image: url('https://raw.githubusercontent.com/rickyrigur/YussefNabih/main/Speech_Bubble.png'); /* Background image URL */
+    background-size: cover;
+    background-position: left; /* Align background image to the left */
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px;
+    padding-left: 35px; /* Add padding to move text 5px to the right */
+    box-sizing: border-box;
+    position: relative;*/
+  }
+
+  .whatsapp-message-text {
+    color: black;
+    font-size: 14px; /* Increased font size */
+    text-align: left;
+  }
+
+  .whatsapp-message-time {
+    position: absolute;
+    bottom: 10px; /* Position the time at the bottom */
+    right: 10px; /* Position the time to the right */
+    font-size: 10px; /* Small font size for the time */
+    color: black; /* Text color for the time */
   }
   
   .whatsapp-button-container {
     padding: 16px; /* Add padding to position the button within the container */
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    margin-bottom: -1px; /* Adjusted margin-bottom to overlap with container border */
   }
   
   .whatsapp-button-container button {
-    width: 100%;
+    width: 75%;
     height: 50px;
-    background-color: #25D366;
+    background-color: #25d366; /* New button color */
     color: white;
     border: none;
     border-radius: 25px; /* More rounded borders */
     cursor: pointer;
     font-size: 16px;
-	font-weight: bold;
+    font-weight: bold;
   }
 </style>
 
@@ -116,6 +160,11 @@
     if (container.style.display === 'flex') {
       container.style.display = 'none';
     } else {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const currentTime = `${hours}:${minutes}`;
+      document.getElementById('message-time').innerText = currentTime;
       container.style.display = 'flex';
     }
   });
